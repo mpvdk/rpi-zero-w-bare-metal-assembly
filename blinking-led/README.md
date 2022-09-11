@@ -9,3 +9,7 @@ The systimer runs at 250 MHz - 20 times as much. Yet I can't find any default pr
 Anyone who can explain this to me please do.
 
 GPIO 21 is in GPFSEL2
+
+# Schematic
+
+![Blinking LED schematic](https://raw.githubusercontent.com/mpvdk/rpi-zero-w-bare-metal/main/schematics/blinking-led.webp "Blinking LED schematic")

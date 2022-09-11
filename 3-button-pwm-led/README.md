@@ -12,3 +12,7 @@ A button press causes an interrupt that checks which button is being pressed and
 - Button 1 causes wide pulse width (light glow of LED)
 - Button 2 causes medium pulse width (medium glow of LED)
 - Button 3 causes narrow pulse width (max glow of LED)
+
+# Schematic
+
+![3-button pwm LED schematic](https://raw.githubusercontent.com/mpvdk/rpi-zero-w-bare-metal/main/schematics/3-button-pwm-led.webp "3-button pwm LED schematic")
