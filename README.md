@@ -19,11 +19,13 @@ This repository offers various examples of bare-metal assembly programs for the 
    - 3-button-pwm-led
    - blinking-led
    - button-led
+   - button-led-toggle
 
 1. **Interrupts**
 
    - 3-button-pwm-led
    - button-led
+   - button-led-toggle
 
 1. **Pulse Width Modulator**
 
@@ -41,7 +43,7 @@ This repository offers various examples of bare-metal assembly programs for the 
 
 ## Why
 
-**First of all** because I want to understand the interface between software and hardware. I choose to start by learning Arm assembly and I just so happened to have some Raspberry Pis on hand.
+**First of all** because I want to understand the interface between software and hardware. I chose to start by learning Arm assembly and I just so happened to have some Raspberry Pis on hand.
 
 **Second**, during this process I encountered some difficulties in finding the right resources. There is a lot to find but it was difficult, sometimes, to tie it all together. I hope that others may find these examples beneficial to their learning process.
 
@@ -53,7 +55,7 @@ As you can see in the **Makefile** all you need is the Arm GNU toolchain, which 
 
 I'm using Linux and I've installed it in `/usr/local/bin`, and then I added `/usr/local/bin/arm-none-eabi/bin` to my PATH variable. If your situation is different, you might need to edit the Makefile a little to make it work for you.
 
-Also, you will obviously need a text editor. Any text editor will do but some syntax highlighting is definitely a pre. I like to use VIM because I've gotten used to it and I like to stay in the terminal. Do whatever works for you. If you're clueless, look at VSCode.
+Also, you will obviously need a text editor. Any text editor will do but some syntax highlighting is definitely advantageous. I like to use VIM because I've gotten used to it and I like to stay in the terminal. Do whatever works for you. If you're clueless, look at VSCode.
 
 # The SD card
 
