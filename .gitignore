@@ -1,0 +1,6 @@
+/firmware
+*.o
+*.img
+*.elf
+*.swp
+*.map
