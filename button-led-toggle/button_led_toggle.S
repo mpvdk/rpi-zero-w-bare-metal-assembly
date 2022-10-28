@@ -150,15 +150,9 @@ idle: B idle
 
 @ GPIO interrupt handler
 interrupt_handler:
-    LDR  r0,=0xbebc2                     @ 0xbebc2 clock cycles ~ 1ms
-    BL   wait_r0_cycles                  @ Software debouncing
-    LDR  r0,=GPIO_BASE                   @ Load GPIO_BASE address into r0
-    LDR  r1,[r0,#GPLEV0_OFFSET]          @ Load current value of GPIOs into r1
-    AND  r2,r1,#BIT_20                   @ Single out GPIO20 (button input)
-    CMP  r2,#BIT_20                      @ Compare result with bit 20
-    BLNE enable_interrupts               @ If not equal, it's button bounce. Ignore
-    BNE  idle
+    BL   debounce
 
+    LDR  r1,[r0,#GPLEV0_OFFSET]          @ Load current value of GPIOs into r1
     AND  r2,r1,#BIT_21                   @ Single out GPIO21 (LED output)
     CMP  r2,#BIT_21                      @ Compare result with bit 21
     BLEQ turn_led_off                    @ If equal, LED is on - turn it off
@@ -167,6 +161,18 @@ interrupt_handler:
     BL   enable_interrupts               @ Re enable interrupts
 
     B    idle
+
+@ Software button debounce
+debounce:
+    LDR  r0,=0xbebc2                     @ 0xbebc2 clock cycles ~ 1ms
+    BL   wait_r0_cycles                  @ Software debouncing
+    LDR  r0,=GPIO_BASE                   @ Load GPIO_BASE address into r0
+    LDR  r1,[r0,#GPLEV0_OFFSET]          @ Load current value of GPIOs into r1
+    AND  r2,r1,#BIT_20                   @ Single out GPIO20 (button input)
+    CMP  r2,#BIT_20                      @ Compare result with bit 20
+    BLNE enable_interrupts               @ If not equal, it's button bounce. Reset interrupts.
+    BNE  idle                            @ And go back to idle
+    BX   LR                              @ Bounce passed - legitimate button press
 
 @ Delay processing until button is released
 wait_for_button_release:
