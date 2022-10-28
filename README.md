@@ -2,15 +2,7 @@
 
 ## What
 
-This repository offers various examples of bare-metal assembly programs for the BCM2835. This chip is used for the Raspberry Pi models
-
-- Zero
-- Zero W (**not** the Zero 2 W - that one uses BCM2711)
-- 1A(+)
-- 1B(+) (**not** the now-popular 4B - that one also uses BCM2711)
-- Compute Model 1
-
-[See here for more info](https://www.raspberrypi.com/documentation/computers/processors.html)
+This repository offers various examples of bare-metal assembly programs for the BCM2835. This chip is used for the Raspberry Pi models Zero, Zero W, 1A(+), 1B(+), Compute Model 1. [See here for more info.](https://www.raspberrypi.com/documentation/computers/processors.html)
 
 **The goal** is to create simple example programs for every peripheral/functionality on the chip:
 
