@@ -47,7 +47,7 @@
 .equ PWMDAT2_OFFSET,0x24
 
 @--------------------------------------------------------------
-@ Clock Master registers addresses
+@ Clock Manager registers addresses
 @
 @ NOTE: these are not in the BCM2835 datasheet
 @ see https://www.scribd.com/doc/127599939/BCM2835-Audio-clocks
@@ -159,7 +159,7 @@ _reset:
     STR  r1,[r0,#GPFSEL1_OFFSET]         @ Store value in GPFSEL1 reg
 
     @---------------------------
-    @ CLOCK MASTER CONFIGURATION
+    @ CLOCK MANAGER CONFIGURATION
     @---------------------------
     LDR  r0,=CM_PWMCTL			 @ Load address of CM_PWMCTL into r0
     LDR  r1,[r0]			 @ Load value stored in CM_PWMCTL into r1
@@ -201,7 +201,7 @@ _reset:
     STR  r1,[r0,#PWMRNG1_OFFSET]         @ Set range of 35
     LDR  r1,=35
     STR  r1,[r0,#PWMDAT1_OFFSET]         @ Set 1/1 pulse width for full brightness LED at startup
-    LDR  r1,=0x81                        @ 0b01 = enabled in PWM mode
+    LDR  r1,=0b01                        @ 0b01 = enabled in PWM mode
     STR  r1,[r0,#PWMCTL_OFFSET]          @ Store value in PWMCTL
 
     @------------------------
@@ -217,7 +217,7 @@ _reset:
     @ Enable all GPIO interrupts
     MOV  r1,#0b1                         @ Going to enable interrupt for GPIO bank 0
     MOV  r1,r1,LSL#20                    @ Need to set bit 17
-    STR  r1,[r0,#EIRQ2_OFFSET]           @ Set bits 17-20 of EIRQ2
+    STR  r1,[r0,#EIRQ2_OFFSET]           @ Set bits 17 of EIRQ2
 
 @ Idle trap
 idle: B idle
@@ -288,7 +288,7 @@ loop:
 @ Wait till BUSY flag is cleared in CM_PWMCTL
 wait_for_clock_stop:
     LDR  r0,=CM_PWMCTL			 @ Load address of CM_PWMCTL into r0
-    LDR  r1,[r0]                         @ Load clock master pwm control into r5
+    LDR  r1,[r0]                         @ Load clock manager pwm control into r5
     AND  r1,r1,#0x80                     @ Mask to isolate BUSY flag
     CMP  r1,#0x80                        @ Check to see if BUSY flag is set
     BEQ  wait_for_clock_stop             @ Wait till BUSY flag = 0
@@ -296,7 +296,7 @@ wait_for_clock_stop:
 
 wait_for_clock_start:
     LDR  r0,=CM_PWMCTL			 @ Load address of CM_PWMCTL into r0
-    LDR  r1,[r0]                         @ Load clock master pwm control into r5
+    LDR  r1,[r0]                         @ Load clock manager pwm control into r5
     AND  r1,r1,#0x80                     @ Mask to isolate BUSY flag
     CMP  r1,#0x80                        @ Check to see if BUSY flag is set
     BNE  wait_for_clock_start            @ Wait till BUSY flag = 1
