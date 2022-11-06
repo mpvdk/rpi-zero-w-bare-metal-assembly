@@ -163,7 +163,7 @@ _reset:
     @---------------------------
     LDR  r0,=CM_PWMCTL			 @ Load address of CM_PWMCTL into r0
     LDR  r1,[r0]			 @ Load value stored in CM_PWMCTL into r1
-    LDR  r2,=PASSWD			 @ Load address of PASSWD into r2
+    LDR  r2,=PASSWD			 @ Load PASSWD into r2
     LDR  r3,=0x00FFFFEF			 @ Prepare to clear PASSWD and ENAB bits
     AND  r3,r3,r1			 @ AND CM_PWMCTL with r3 to clear PASSWD and ENAB bits
     ORR  r3,r3,r2			 @ OR in the PASSWD
